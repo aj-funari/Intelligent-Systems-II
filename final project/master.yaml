@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  version: '1.0'
+  title: e222_project
+  description: ML application project
+
+paths:
+ /pred/{arg}:
+    get:
+      tags:
+        - PRED
+      operationId: my_python_dir.prediction.my_prediction
+      description: returns prediction of ML application
+      parameters:
+        - in: path
+          name: arg
+          required: true
+          schema:
+            type: array
+            items:
+              type: number
+            minItems: 1
+          style: simple
+          explode: true
+        - in: query
+          name: metadata
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: 'death prediction (0 or 1)'
+              
+servers:
+  - url: 'http://localhost:8080/e222'
